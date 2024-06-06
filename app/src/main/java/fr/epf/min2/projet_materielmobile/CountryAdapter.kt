@@ -23,6 +23,7 @@ class CountryAdapter : ListAdapter<Country, CountryAdapter.CountryViewHolder>(Di
         holder.bind(getItem(position))
     }
 
+
     class CountryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val flagImageView: ImageView = itemView.findViewById(R.id.flagImageView)
         private val countryNameTextView: TextView = itemView.findViewById(R.id.countryNameTextView)

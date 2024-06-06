@@ -2,6 +2,7 @@ package fr.epf.min2.projet_materielmobile
 
 import CountryAdapter
 import android.os.Bundle
+import android.util.Log
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -33,12 +34,13 @@ class MainActivity : AppCompatActivity()  {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let { viewModel.searchCountries(it) }
+                query?.let { viewModel.searchCountries(query) }
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let { viewModel.searchCountries(it) }
+                newText?.let { viewModel.searchCountries(newText) }
+                Log.e("MainActivity", "newText: $newText")
                 return false
             }
         })
