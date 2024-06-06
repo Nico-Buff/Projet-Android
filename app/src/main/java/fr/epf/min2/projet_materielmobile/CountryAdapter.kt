@@ -1,3 +1,4 @@
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import fr.epf.min2.projet_materielmobile.CountryDetailActivity
 import fr.epf.min2.projet_materielmobile.R
 import fr.epf.min2.projet_materielmobile.model.Country
 
@@ -30,7 +32,22 @@ class CountryAdapter : ListAdapter<Country, CountryAdapter.CountryViewHolder>(Di
             Glide.with(itemView.context)
                 .load(country.flag)
                 .into(flagImageView)
+
+            itemView.setOnClickListener {
+                val context = itemView.context
+                val intent = Intent(context, CountryDetailActivity::class.java).apply {
+                    putExtra("country_name", country.name.common)
+                    putExtra("country_capital", country.capital[0])
+                    putExtra("country_region", country.region)
+                    putExtra("country_subregion", country.subregion)
+
+                    putExtra("country_population", country.population)
+                    putExtra("country_flag", country.flag)
+                }
+                context.startActivity(intent)
+            }
         }
+
     }
 
     class DiffCallback : DiffUtil.ItemCallback<Country>() {

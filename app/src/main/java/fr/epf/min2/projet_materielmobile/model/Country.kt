@@ -1,13 +1,18 @@
 package fr.epf.min2.projet_materielmobile.model
 
-import androidx.core.view.ContentInfoCompat
+import android.os.Parcelable
+
 
 data class Country(
-    val name: names,
+    val name: Name,
     val capital: List<String>,
+    val region: String,
+    val subregion: String,
+    val population: Int,
     val flag: String
 )
 
-data class names(
-    val common : String
+
+data class Name(
+    val common: String
 )
