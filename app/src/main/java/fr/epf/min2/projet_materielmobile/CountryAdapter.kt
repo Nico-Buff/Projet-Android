@@ -25,14 +25,13 @@ class CountryAdapter : ListAdapter<Country, CountryAdapter.CountryViewHolder>(Di
 
 
     class CountryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val flagImageView: ImageView = itemView.findViewById(R.id.flagImageView)
+        private val flagTextView: TextView = itemView.findViewById(R.id.flagTextView)
         private val countryNameTextView: TextView = itemView.findViewById(R.id.countryNameTextView)
 
         fun bind(country: Country) {
             countryNameTextView.text = country.name.common
-            Glide.with(itemView.context)
-                .load(country.flag)
-                .into(flagImageView)
+            flagTextView.text = country.flag
+
 
             itemView.setOnClickListener {
                 val context = itemView.context

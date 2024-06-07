@@ -18,7 +18,7 @@ class CountryDetailActivity : AppCompatActivity() {
         val regionTextView: TextView = findViewById(R.id.region)
         val subregionTextView: TextView = findViewById(R.id.subregion)
         val populationTextView: TextView = findViewById(R.id.population)
-        val flagImageView: ImageView = findViewById(R.id.flagImageView)
+        val flagImageView: TextView = findViewById(R.id.flagTextView)
 
         val backButton: Button = findViewById(R.id.backButton)
 
@@ -44,9 +44,10 @@ class CountryDetailActivity : AppCompatActivity() {
         populationTextView.text = countryPopulation.toString()
 
         countryFlag?.let {
-            Glide.with(this)
+            /*Glide.with(this)
                 .load(it)
-                .into(flagImageView)
+                .into(flagImageView)*/
+            flagImageView.text = it
         }
 
         backButton.setOnClickListener {
