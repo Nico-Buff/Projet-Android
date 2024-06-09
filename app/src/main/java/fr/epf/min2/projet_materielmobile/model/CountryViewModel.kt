@@ -14,7 +14,7 @@ class CountryViewModel(application: Application) : AndroidViewModel(application)
     val countries = MutableLiveData<List<Country>?>()
     var filteredList: List<Country> ?= null
     lateinit var adapter: CountryAdapter
-    val countriesEx = mutableListOf<Country>()
+    val notFilteredList = mutableListOf<Country>()
 
 
     /*init {
@@ -45,6 +45,7 @@ class CountryViewModel(application: Application) : AndroidViewModel(application)
                 try {
                     val countriesResponse = RetrofitInstance.api.getAllCountries()
                     countries.value = countriesResponse
+                    notFilteredList.addAll(countriesResponse)
                     success = true
                 } catch (e: Exception) {
                     Log.e("CountryViewModel", "Error fetching countries: ${e.message}")
@@ -55,6 +56,7 @@ class CountryViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun searchCountries(query: String) {
+        countries.value = notFilteredList
         filteredList = countries.value?.filter {
             it.name.common.contains(query, ignoreCase = true) || (it.capital?.getOrNull(0)
                 ?.contains(query, ignoreCase = true) == true)
