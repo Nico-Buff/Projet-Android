@@ -1,22 +1,26 @@
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import fr.epf.min2.projet_materielmobile.CountryDetailActivity
+import fr.epf.min2.projet_materielmobile.FavoriteRepository
 import fr.epf.min2.projet_materielmobile.R
 import fr.epf.min2.projet_materielmobile.model.Country
 
-class CountryAdapter : ListAdapter<Country, CountryAdapter.CountryViewHolder>(DiffCallback()) {
+
+class CountryAdapter (private val context: Context) : ListAdapter<Country, CountryAdapter.CountryViewHolder>(DiffCallback()) {
+
+    private val favoriteRepository = FavoriteRepository(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.country_item, parent, false)
-        return CountryViewHolder(view)
+        return CountryViewHolder(view, favoriteRepository)
     }
 
     override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
@@ -24,9 +28,10 @@ class CountryAdapter : ListAdapter<Country, CountryAdapter.CountryViewHolder>(Di
     }
 
 
-    class CountryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class CountryViewHolder(itemView: View, private val favoriteRepository: FavoriteRepository) : RecyclerView.ViewHolder(itemView) {
         private val flagTextView: TextView = itemView.findViewById(R.id.flagTextView)
         private val countryNameTextView: TextView = itemView.findViewById(R.id.countryNameTextView)
+        private val favoriteButton: ImageButton = itemView.findViewById(R.id.favoriteButton)
 
         fun bind(country: Country) {
             countryNameTextView.text = country.name.common
@@ -45,6 +50,22 @@ class CountryAdapter : ListAdapter<Country, CountryAdapter.CountryViewHolder>(Di
                     putExtra("country_flag", country.flag)
                 }
                 context.startActivity(intent)
+            }
+
+            if (favoriteRepository.getFavorites().contains(country)) {
+                favoriteButton.setImageResource(R.drawable.ic_star_filled)
+            } else {
+                favoriteButton.setImageResource(R.drawable.ic_star_border)
+            }
+
+            favoriteButton.setOnClickListener {
+                if (favoriteRepository.getFavorites().contains(country)) {
+                    favoriteRepository.removeFavorite(country)
+                    favoriteButton.setImageResource(R.drawable.ic_star_border)
+                } else {
+                    favoriteRepository.addFavorite(country)
+                    favoriteButton.setImageResource(R.drawable.ic_star_filled)
+                }
             }
         }
 

@@ -9,8 +9,7 @@
         android:id="@+id/flagTextView"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:contentDescription="@string/flag" />
+        android:layout_marginEnd="8dp" />
 
     <TextView
         android:id="@+id/countryNameTextView"
@@ -25,6 +24,6 @@
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_star_border"
-        android:contentDescription="Add to favorites" />
+        android:contentDescription="Ajouter aux favoris" />
 
 </LinearLayout>
