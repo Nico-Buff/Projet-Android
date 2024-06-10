@@ -65,5 +65,7 @@ android {
         implementation ("com.google.code.gson:gson:2.8.8")
         implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
         implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.8.0")
+
+        implementation ("com.google.android.material:material:1.4.0")
     }
 

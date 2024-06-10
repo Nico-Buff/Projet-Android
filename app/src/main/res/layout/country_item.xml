@@ -14,8 +14,17 @@
 
     <TextView
         android:id="@+id/countryNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="16sp" />
+
+    <ImageButton
+        android:id="@+id/favoriteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp" />
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_star_border"
+        android:contentDescription="Add to favorites" />
 
 </LinearLayout>
